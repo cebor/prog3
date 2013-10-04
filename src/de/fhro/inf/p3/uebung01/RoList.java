@@ -175,10 +175,7 @@ public class RoList {
 
         RoList roList = (RoList) o;
 
-        if (size != roList.size) return false;
-        if (!Arrays.equals(elements, roList.elements)) return false;
-
-        return true;
+        return size == roList.size && Arrays.equals(elements, roList.elements);
     }
 
     @Override

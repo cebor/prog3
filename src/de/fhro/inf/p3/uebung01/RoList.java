@@ -66,14 +66,17 @@ public class RoList {
      * @param i position
      */
     public void remove(int i) {
-        Object[] array = new Object[elements.length - 1];
-        size = 0;
-        for (int j = 0; j < elements.length; j++) {
-            if (j != i) {
-                array[size++] = elements[j];
+        if (i < size) {
+            Object[] array = new Object[elements.length - 1];
+            size = 0;
+            for (int j = 0; j < elements.length; j++) {
+                if (j != i) {
+                    array[size++] = elements[j];
+                }
             }
-        }
-        elements = array;
+            elements = array;
+        } else
+            throw new NoSuchElementException();
     }
 
     /**

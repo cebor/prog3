@@ -216,7 +216,7 @@ public class RoList {
 
         @Override
         public boolean hasNext() {
-            return pos < size && array[pos] != null;
+            return pos < size;
         }
 
         @Override

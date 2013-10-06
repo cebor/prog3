@@ -14,11 +14,13 @@ import java.util.NoSuchElementException;
  */
 public class RoList {
 
+    final private int ARRAY_LENGTH = 5000;
+
     private Object[] elements;
     private int size;
 
     public RoList() {
-        elements = new Object[0];
+        elements = new Object[ARRAY_LENGTH];
         size = 0;
     }
 
@@ -33,7 +35,7 @@ public class RoList {
      * removes all elements from this
      */
     public void clear() {
-        elements = new Object[0];
+        elements = new Object[ARRAY_LENGTH];
         size = 0;
     }
 
@@ -43,9 +45,11 @@ public class RoList {
      * @param x element
      */
     public void add(Object x) {
-        Object[] array = new Object[elements.length + 1];
-        System.arraycopy(elements, 0, array, 0, elements.length);
-        elements = array;
+        if (size == elements.length) {
+            Object[] array = new Object[elements.length + ARRAY_LENGTH];
+            System.arraycopy(elements, 0, array, 0, elements.length);
+            elements = array;
+        }
         elements[size++] = x;
     }
 
@@ -67,16 +71,29 @@ public class RoList {
      */
     public void remove(int i) {
         if (i < size) {
-            Object[] array = new Object[elements.length - 1];
+            Object[] array;
+
+            elements[i] = null; // set element to remove = null
+
+            if (size == elements.length - ARRAY_LENGTH + 1) {
+                array = new Object[elements.length - ARRAY_LENGTH];
+            }
+            else {
+                array = new Object[elements.length];
+            }
+
             size = 0;
-            for (int j = 0; j < elements.length; j++) {
-                if (j != i) {
+
+            for (int j = 0; j < array.length; j++) {
+                if (elements[j] != null) {
                     array[size++] = elements[j];
                 }
             }
+
             elements = array;
-        } else
+        } else {
             throw new NoSuchElementException();
+        }
     }
 
     /**
@@ -136,7 +153,10 @@ public class RoList {
      * @return element @ [i]
      */
     public Object get(int i) {
-        return elements[i];
+        if (i < size)
+            return elements[i];
+        else
+            throw new NoSuchElementException();
     }
 
 
@@ -206,7 +226,7 @@ public class RoList {
 
         @Override
         public boolean hasNext() {
-            return pos < array.length;
+            return pos < array.length && array[pos] != null;
         }
 
         @Override

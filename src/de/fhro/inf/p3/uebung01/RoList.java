@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  */
 public class RoList {
 
-    final private int ARRAY_LENGTH = 100;
+    private final int ARRAY_LENGTH = 100;
 
     private Object[] elements;
     private int size;
@@ -45,11 +45,13 @@ public class RoList {
      * @param x element
      */
     public void add(Object x) {
+        // reallocate array capacity
         if (size == elements.length) {
             Object[] array = new Object[elements.length + ARRAY_LENGTH];
             System.arraycopy(elements, 0, array, 0, elements.length);
             elements = array;
         }
+
         elements[size++] = x;
     }
 
@@ -73,11 +75,13 @@ public class RoList {
         if (i < size) {
             Object[] array;
 
+            // reallocate array capacity
             if (size == elements.length - ARRAY_LENGTH + 1 && elements.length != ARRAY_LENGTH)
                 array = new Object[elements.length - ARRAY_LENGTH];
             else
                 array = new Object[elements.length];
 
+            // shrink array
             System.arraycopy(elements, 0, array, 0, i);
             System.arraycopy(elements, i + 1, array, i, size-- - i - 1);
 
@@ -173,7 +177,7 @@ public class RoList {
     }
 
     /**
-     * Iterator Method
+     * iterator method
      *
      * @return Iterator
      */
@@ -204,7 +208,7 @@ public class RoList {
     }
 
     /**
-     * Iterator Helper for RoList
+     * iterator for RoList
      */
     private class RoIterator implements Iterator {
         private Object array[];

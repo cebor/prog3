@@ -73,27 +73,17 @@ public class RoList {
         if (i < size) {
             Object[] array;
 
-            elements[i] = null; // set element to remove = null
-
-            if (size == elements.length - ARRAY_LENGTH + 1) {
+            if (size == elements.length - ARRAY_LENGTH + 1 && elements.length != ARRAY_LENGTH)
                 array = new Object[elements.length - ARRAY_LENGTH];
-            }
-            else {
+            else
                 array = new Object[elements.length];
-            }
 
-            size = 0;
-
-            for (int j = 0; j < array.length; j++) {
-                if (elements[j] != null) {
-                    array[size++] = elements[j];
-                }
-            }
+            System.arraycopy(elements, 0, array, 0, i);
+            System.arraycopy(elements, i + 1, array, i, size-- - i - 1);
 
             elements = array;
-        } else {
+        } else
             throw new NoSuchElementException();
-        }
     }
 
     /**
@@ -128,7 +118,7 @@ public class RoList {
      * @return index or -1 when not found
      */
     public int indexOf(Object x) {
-        for (int i = 0; i < elements.length; i++) {
+        for (int i = 0; i < size; i++) {
             if (x.equals(elements[i])) {
                 return i;
             }
@@ -226,7 +216,7 @@ public class RoList {
 
         @Override
         public boolean hasNext() {
-            return pos < array.length && array[pos] != null;
+            return pos < size && array[pos] != null;
         }
 
         @Override

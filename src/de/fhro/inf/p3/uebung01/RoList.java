@@ -49,7 +49,7 @@ public class RoList {
         if (size == elements.length) {
             // reallocate array capacity
             Object[] array = new Object[elements.length + ARRAY_LENGTH];
-            System.arraycopy(elements, 0, array, 0, elements.length);
+            System.arraycopy(elements, 0, array, 0, size);
             elements = array;
         }
 

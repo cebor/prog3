@@ -84,11 +84,8 @@ public class RoList {
 
             size = 0;
 
-            boolean found = false;
-
             for (int j = 0; j < array.length; j++) {
-                if (elements[j] != null && !found) {
-                    found = true;
+                if (elements[j] != null) {
                     array[size++] = elements[j];
                 }
             }

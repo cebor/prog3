@@ -19,6 +19,7 @@ public class RoList {
     private Object[] elements;
     private int size;
 
+
     public RoList() {
         elements = new Object[ARRAY_LENGTH];
         size = 0;
@@ -26,7 +27,7 @@ public class RoList {
 
     public RoList(RoList xs) {
         elements = new Object[xs.elements.length];
-        System.arraycopy(xs.elements, 0, elements, 0, xs.elements.length);
+        System.arraycopy(xs.elements, 0, elements, 0, xs.size);
         size = xs.size;
     }
 
@@ -153,7 +154,6 @@ public class RoList {
             throw new NoSuchElementException();
     }
 
-
     /**
      * replaces element y at position i with x
      *
@@ -185,6 +185,7 @@ public class RoList {
         return new RoIterator(elements);
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -207,9 +208,7 @@ public class RoList {
         return new RoList(this);
     }
 
-    /**
-     * iterator for RoList
-     */
+
     private class RoIterator implements Iterator {
         private Object array[];
         private int pos = 0;

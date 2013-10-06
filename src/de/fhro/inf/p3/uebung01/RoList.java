@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  */
 public class RoList {
 
-    final private int ARRAY_LENGTH = 5000;
+    final private int ARRAY_LENGTH = 100;
 
     private Object[] elements;
     private int size;
@@ -84,8 +84,11 @@ public class RoList {
 
             size = 0;
 
+            boolean found = false;
+
             for (int j = 0; j < array.length; j++) {
-                if (elements[j] != null) {
+                if (elements[j] != null && !found) {
+                    found = true;
                     array[size++] = elements[j];
                 }
             }

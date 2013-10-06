@@ -162,9 +162,12 @@ public class RoList {
      * @return element y
      */
     public Object set(int i, Object x) {
-        Object e = elements[i];
-        elements[i] = x;
-        return e;
+        if (i < size) {
+            Object e = elements[i];
+            elements[i] = x;
+            return e;
+        } else
+            throw new IndexOutOfBoundsException();
     }
 
     /**

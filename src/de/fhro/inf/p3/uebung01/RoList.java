@@ -74,19 +74,19 @@ public class RoList {
      */
     public void remove(int i) {
         if (i < size) {
-            Object[] array;
-
             // reallocate array capacity
-            if (size == elements.length - ARRAY_LENGTH + 1 && elements.length != ARRAY_LENGTH)
-                array = new Object[elements.length - ARRAY_LENGTH];
-            else
-                array = new Object[elements.length];
+            if (size == elements.length - ARRAY_LENGTH + 1 && elements.length != ARRAY_LENGTH) {
+                Object[] array = new Object[elements.length - ARRAY_LENGTH];
 
-            // shrink array
-            System.arraycopy(elements, 0, array, 0, i);
-            System.arraycopy(elements, i + 1, array, i, size-- - i - 1);
+                // copy and shrink array
+                System.arraycopy(elements, 0, array, 0, i);
+                System.arraycopy(elements, i + 1, array, i, size-- - i - 1);
 
-            elements = array;
+                elements = array;
+            } else {
+                // shrink array
+                System.arraycopy(elements, i + 1, elements, i, size-- - i - 1);
+            }
         } else
             throw new NoSuchElementException();
     }

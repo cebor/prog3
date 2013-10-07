@@ -165,10 +165,11 @@ public class RoList {
         return size;
     }
 
+
     /**
      * extends array
      */
-    public void extend() {
+    private void extend() {
         if (size >= elements.length) {
             Object[] tmp = new Object[elements.length + ARRAY_LENGTH];
             System.arraycopy(elements, 0, tmp, 0, size);
@@ -179,7 +180,7 @@ public class RoList {
     /**
      * shrink array
      */
-    public void shrink() {
+    private void shrink() {
         if (size + ARRAY_LENGTH < elements.length) {
             Object[] tmp = new Object[elements.length - ARRAY_LENGTH];
             System.arraycopy(elements, 0, tmp, 0, tmp.length);

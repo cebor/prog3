@@ -46,13 +46,7 @@ public class RoList {
      * @param x element
      */
     public void add(Object x) {
-        if (size == elements.length) {
-            // reallocate array capacity
-            Object[] array = new Object[elements.length + ARRAY_LENGTH];
-            System.arraycopy(elements, 0, array, 0, size);
-            elements = array;
-        }
-
+        extend();
         elements[size++] = x;
     }
 
@@ -62,8 +56,8 @@ public class RoList {
      * @param xs collection of elements
      */
     public void addAll(Collection xs) {
-        for (Object e : xs) {
-            add(e);
+        for (Object x : xs) {
+            add(x);
         }
     }
 
@@ -73,22 +67,12 @@ public class RoList {
      * @param i position
      */
     public void remove(int i) {
-        if (i < size) {
-            if (size == elements.length - ARRAY_LENGTH + 1 && elements.length != ARRAY_LENGTH) {
-                // reallocate array capacity
-                Object[] array = new Object[elements.length - ARRAY_LENGTH];
+        if (i < 0 || i >= size)
+            throw new IndexOutOfBoundsException();
 
-                // copy and shrink array
-                System.arraycopy(elements, 0, array, 0, i);
-                System.arraycopy(elements, i + 1, array, i, size-- - i - 1);
-
-                elements = array;
-            } else {
-                // shrink array
-                System.arraycopy(elements, i + 1, elements, i, size-- - i - 1);
-            }
-        } else
-            throw new NoSuchElementException();
+        System.arraycopy(elements, i + 1, elements, i, size - i - 1);
+        elements[--size] = null;
+        shrink();
     }
 
     /**
@@ -98,11 +82,13 @@ public class RoList {
      * @return true when element x exists
      */
     public boolean remove(Object x) {
-        if (contains(x)) {
-            remove(indexOf(x));
+        int i = indexOf(x);
+        if (i < 0)
+            return false;
+        else {
+            remove(i);
             return true;
         }
-        return false;
     }
 
     /**
@@ -111,8 +97,8 @@ public class RoList {
      * @param xs collection of elements
      */
     public void removeAll(Collection xs) {
-        for (Object e : xs) {
-            remove(e);
+        for (Object x : xs) {
+            remove(x);
         }
     }
 
@@ -148,10 +134,10 @@ public class RoList {
      * @return element @ [i]
      */
     public Object get(int i) {
-        if (i < size)
-            return elements[i];
-        else
-            throw new NoSuchElementException();
+        if (i >= size)
+            throw new IndexOutOfBoundsException();
+
+        return elements[i];
     }
 
     /**
@@ -162,12 +148,12 @@ public class RoList {
      * @return element y
      */
     public Object set(int i, Object x) {
-        if (i < size) {
-            Object e = elements[i];
-            elements[i] = x;
-            return e;
-        } else
+        if (i >= size)
             throw new IndexOutOfBoundsException();
+
+        Object e = elements[i];
+        elements[i] = x;
+        return e;
     }
 
     /**
@@ -180,14 +166,36 @@ public class RoList {
     }
 
     /**
-     * iterator method
+     * extends array
+     */
+    public void extend() {
+        if (size >= elements.length) {
+            Object[] tmp = new Object[elements.length + ARRAY_LENGTH];
+            System.arraycopy(elements, 0, tmp, 0, size);
+            elements = tmp;
+        }
+    }
+
+    /**
+     * shrink array
+     */
+    public void shrink() {
+        if (size + ARRAY_LENGTH < elements.length) {
+            Object[] tmp = new Object[elements.length - ARRAY_LENGTH];
+            System.arraycopy(elements, 0, tmp, 0, tmp.length);
+            elements = tmp;
+        }
+    }
+
+
+    /**
+     * iterator for RoList
      *
-     * @return Iterator
+     * @return iterator
      */
     public Iterator iterator() {
         return new RoIterator(elements);
     }
-
 
     @Override
     public boolean equals(Object o) {

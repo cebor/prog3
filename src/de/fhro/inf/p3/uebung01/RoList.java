@@ -195,7 +195,7 @@ public class RoList {
      * @return iterator
      */
     public Iterator iterator() {
-        return new RoIterator(elements);
+        return new RoIterator(this);
     }
 
     @Override
@@ -222,22 +222,22 @@ public class RoList {
 
 
     private class RoIterator implements Iterator {
-        private Object array[];
+        private RoList list;
         private int pos = 0;
 
-        public RoIterator(Object array[]) {
-            this.array = array;
+        public RoIterator(RoList list) {
+            this.list = list;
         }
 
         @Override
         public boolean hasNext() {
-            return pos < size;
+            return pos < list.size();
         }
 
         @Override
         public Object next() throws NoSuchElementException {
             if (hasNext())
-                return array[pos++];
+                return list.get(pos++);
             else
                 throw new NoSuchElementException();
         }

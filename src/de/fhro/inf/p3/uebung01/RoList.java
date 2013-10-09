@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  */
 public class RoList {
 
-    private final int ARRAY_LENGTH = 100;
+    private static final int ARRAY_LENGTH = 100;
 
     private Object[] elements;
     private int size;
@@ -198,6 +198,7 @@ public class RoList {
         return new RoIterator(this);
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -206,11 +207,12 @@ public class RoList {
         RoList roList = (RoList) o;
 
         return size == roList.size && Arrays.equals(elements, roList.elements);
+
     }
 
     @Override
     public int hashCode() {
-        int result = elements != null ? Arrays.hashCode(elements) : 0;
+        int result = Arrays.hashCode(elements);
         result = 31 * result + size;
         return result;
     }

@@ -207,7 +207,6 @@ public class RoList {
         RoList roList = (RoList) o;
 
         return size == roList.size && Arrays.equals(elements, roList.elements);
-
     }
 
     @Override

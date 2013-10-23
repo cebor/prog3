@@ -1,3 +1,4 @@
+
 /**
  * Created on 	10.04.2004
  * @author  	Hue  nach Vorlagen von Sid
@@ -9,29 +10,34 @@ import java.util.*;
 
 /**
  * abstrakte Klasse mit statischen Methoden zur Erstellung eines Index
+ * diese Klasse ist eine Variation zur Klasse Generich Index
+ * durch die Änderung der Parameter für die Methoden kann der Testtreiber komplett generisch implementiert werden
+ * 
+ * alte Parameter: Array von Listen
+ * neue Parameter Listen von Listen
  */
-public abstract class Index {
+public abstract class TypesaveIndex2 {
 
 	/**
 	 * Erstellt für ein Array von Listen von Strings einen Index
-	 * @param book  das Buch als Array von Listen; jede Liste enthält die zu indizierenden Begriffe
+	 * @param book  das Buch als Liste von Listen; jede Liste enthält die zu indizierenden Begriffe
 	 * @return      eine TreeMap. Key = Begriff; Value = Set der Seiten, auf denen dieser Begriff
 	 *              vorkommt.
 	 */
-	public static Map makeIndex(List[] book) {
+	public static SortedMap<String, SortedSet<Integer>> makeIndex(List<List<String>> book) {
 
-		SortedMap idx = new TreeMap();
+		SortedMap<String,SortedSet<Integer>> idx = new TreeMap<String,SortedSet<Integer>>();
 		// SortedMap ist ein Interface, das Map erweitert; TreeMap eine Implementierung
 
-		for (int i = 0; i < book.length; ++i) { // fuer alle Seiten
-			Iterator j = book[i].iterator();
+		for (int i = 0; i < book.size(); ++i) { // fuer alle Seiten
+			Iterator<String> j = book.get(i).iterator();
 			while (j.hasNext()) {
-				String word = (String) j.next(); // aktuelles Wort
-				SortedSet pages = (SortedSet) idx.get(word);
+				String word = j.next(); // aktuelles Wort
+				SortedSet<Integer> pages = idx.get(word);
 				// SortedSet ist ein Interface, das Set erweitert
 
 				if (pages == null) { // Wort kommt zum ersten Mal vor
-					pages = new TreeSet();
+					pages = new TreeSet<Integer>();
 					// TreeSet ist eine Implementierung von SortedSet
 					idx.put(word, pages);
 				}
@@ -47,30 +53,30 @@ public abstract class Index {
 	 * Erstellt für ein Array von Listen von Strings einen Index.
 	 * <p>
 	 * Der Index wird auf eine vorgegebene Menge von Wörtern eingeschränkt.
-	 * @param book  das Buch als Array von Seiten; jede Seite liegt vor als Liste von Worten
+	 * @param book  das Buch als Liste von Seiten; jede Seite liegt vor als Liste von Worten
 	 * @param keywords  Menge aller Begriffe, deren Vorkommen indiziert wird
 	 * @return      eine SortedMap. Key = Begriff; Value = Set der Seiten, auf denen dieser Begriff
 	 *              vorkommt.
 	 */
-	public static Map makeIndex(List[] book, Set keywords) {
+	public static SortedMap<String, SortedSet<Integer>> makeIndex(List<List<String>> book, Set<String> keywords) {
+	
+		SortedMap<String, SortedSet<Integer>> idx = new TreeMap<String,SortedSet<Integer>>();
 
-		SortedMap idx = new TreeMap();
-
-		for (int i = 0; i < book.length; ++i) { // fuer alle Seiten
+		for (int i = 0; i < book.size(); ++i) { // fuer alle Seiten
 
 			// Schnittmenge aller Begriffe dieser Seite mit den Keyword-Begriffen
-			Set tmp = new HashSet(book[i]);
+			Set<String> tmp = new HashSet<String>(book.get(i));
 			tmp.retainAll(keywords); // von Seite i bleiben nur keywords übrig
 
 			// und jetzt geht es exakt wie in der ersten Methode 
-			Iterator j = tmp.iterator();
+			Iterator<String> j = tmp.iterator();
 			while (j.hasNext()) {
 				String word = (String) j.next(); // aktuelles Wort
-				SortedSet pages = (SortedSet) idx.get(word);
+				SortedSet<Integer> pages = idx.get(word);
 				// SortedSet ist ein Interface, das Set erweitert
 
 				if (pages == null) { // Wort kommt zum ersten Mal vor
-					pages = new TreeSet();
+					pages = new TreeSet<Integer>();
 					// TreeSet ist eine Implementierung von SortedSet
 					idx.put(word, pages);
 				}
@@ -81,8 +87,5 @@ public abstract class Index {
 		}
 		return idx;
 	}
+
 }
-
-
-
-

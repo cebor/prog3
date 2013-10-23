@@ -1,7 +1,7 @@
 /**
  * Created on 	15.04.2004
  * @author  	Hue / FdR  nach Vorlagen von Sid / Weigend
- * Zweck:		JUnit Test für Anagram Beispiele für Stringoperationen und Interface Comparable
+ * Zweck:		JUnit Test für Anagram Beispiele für Stringoperationen und Interface Comparable	
  */
 package de.fhro.inf.p3.uebung03;
 
@@ -35,13 +35,13 @@ public class TestAnagram extends TestCase {
             Assert.assertTrue(a.compare(ss[i], ss[i+1]) <= 0);
         }
         
-//      try {
-//			//j = a.compare(1, 2);
-//			j = a.compare(new Integer(1), new Integer(2));
-//			fail();
-//		} catch (Exception e) {
-//			logger.info("Ausnahme erkannt");
-//		}
+        try {
+			//j = a.compare(1, 2); 
+			j = a.compare(new Integer(1), new Integer(2)); 
+			fail();
+		} catch (Exception e) {
+			logger.info("Ausnahme erkannt");
+		}
         logger.info("Testanagram erfolgreich! ");
         
 

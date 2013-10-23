@@ -1,7 +1,7 @@
 /**
  * Created on 	15.04.2004
  * @author  	Hue  nach Vorlagen von Sid / Weigend
- * Zweck:		Anagram Beispiele f�r Stringoperationen und Interface Comparable	
+ * Zweck:		Anagram Beispiele für Stringoperationen und Interface Comparable	
  */
 package de.fhro.inf.p3.uebung03;
 
@@ -16,10 +16,10 @@ import java.util.Comparator;
  * Beispiel: "ttoo" ist ein Anagramm von "otto",
  * der Vergleich würde Identität ergeben
  */
-public class Anagram implements Comparator<String> {
-	public int compare(String x, String y) {
-		String sx = x;
-		String sy = y;
+public class Anagram implements Comparator {
+	public int compare(Object x, Object y) {
+		String sx = (String) x;
+		String sy = (String) y;
 
 		// Strings in Arrays von char umwandeln
 		char[] cx = sx.toCharArray();
@@ -40,5 +40,6 @@ public class Anagram implements Comparator<String> {
 		// wenn tx und ty ein Anagram sind, dann werden die Ausgangs-Strings zusätzlich verglichen
 		// um die Reihenfolge festzustellen
 		return 0 == result ? sx.compareTo(sy) : result;
+
 	}
 }

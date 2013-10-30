@@ -36,4 +36,18 @@ public abstract class Util {
             xs.set(j, x);
         }
     }
+
+    public  static <T> List<T> reverse2(final List<T> xs) {
+        return new AbstractList<T>() {
+            @Override
+            public T get(int i) {
+                return xs.get(xs.size() - i - 1);
+            }
+
+            @Override
+            public int size() {
+                return xs.size();
+            }
+        };
+    }
 }

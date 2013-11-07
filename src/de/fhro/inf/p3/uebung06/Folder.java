@@ -1,6 +1,7 @@
 package de.fhro.inf.p3.uebung06;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by felix on 11/6/13.

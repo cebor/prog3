@@ -25,6 +25,11 @@ public class TestTicker extends TestCase {
         t.setKurs("DAX", 12.4);
         t.setKurs("FFF", 13.4);
 
+        assertEquals(t.getKurs("DAX"), 12.4);
+        assertEquals(t.getKurs("ABC"), 4.3);
+        assertEquals(t.getKurs("CDF"), 6.2);
+        assertEquals(t.getKurs("FFF"), 13.4);
+
         logger.info("fertig!");
     }
 }

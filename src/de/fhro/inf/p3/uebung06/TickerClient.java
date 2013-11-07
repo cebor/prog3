@@ -18,6 +18,9 @@ public class TickerClient implements Observer {
     // Die aktuelle Kursliste wird auf der Konsole ausgegeben.
     @Override
     public void update(Observable observable, Object o) {
+        if (observable.getClass() != Ticker.class || o.getClass() != String.class)
+            throw new IllegalArgumentException();
+
         Ticker ticker = (Ticker) observable;
         String wkn = (String) o;
 

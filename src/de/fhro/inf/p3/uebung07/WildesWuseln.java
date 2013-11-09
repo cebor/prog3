@@ -50,6 +50,24 @@ public class WildesWuseln extends JFrame {
             }
         });
 
+        JButton buttonNeueKugelFW = new JButton("Neue Kugel (fw)");
+        buttonNeueKugelFW.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                shapeShifter.add(new MovingShape(KugelFactory.getInstance().createKugel(Zufall.color(),
+                        Zufall.size(MAX_SIZE)), Zufall.loc(getBounds().width), Zufall.loc(getBounds().height),
+                        Zufall.speed(MAX_VECTOR), Zufall.speed(MAX_VECTOR)));
+            }
+        });
+        JButton button100NeueKugelnFW = new JButton("100 Neue Kugeln (fw)");
+        button100NeueKugelnFW.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                for (int i = 0; i < 100; ++i)
+                    shapeShifter.add(new MovingShape(KugelFactory.getInstance().createKugel(Zufall.color(),
+                            Zufall.size(MAX_SIZE)), Zufall.loc(getBounds().width), Zufall.loc(getBounds().height),
+                            Zufall.speed(MAX_VECTOR), Zufall.speed(MAX_VECTOR)));
+            }
+        });
+
         JButton buttonClear = new JButton("Aufräumen!");
         buttonClear.setBackground(Color.RED);
         buttonClear.addActionListener(new ActionListener() {
@@ -66,6 +84,8 @@ public class WildesWuseln extends JFrame {
         knopfPanel.setLayout(new GridLayout(8, 1));
         knopfPanel.add(buttonNeueKugel);
         knopfPanel.add(button100NeueKugeln);
+        knopfPanel.add(buttonNeueKugelFW);
+        knopfPanel.add(button100NeueKugelnFW);
         knopfPanel.add(statusLabel);
         knopfPanel.add(buttonClear);
 

@@ -56,7 +56,10 @@ public class ShapeShifter implements ActionListener {
             mShape.getShape().paint(graphics,
                     new Point(mShape.getX(), mShape.getY()));
         }
-        statusLabel.setText("  shapes:" + shapes.size());
+        statusLabel.setText(
+                "  shapes:" + shapes.size() +
+                        "  fws:" + KugelFactory.getInstance().getCount()
+        );
     }
 
     /**

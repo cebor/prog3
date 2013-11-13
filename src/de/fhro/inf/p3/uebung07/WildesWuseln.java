@@ -13,6 +13,9 @@ public class WildesWuseln extends JFrame {
     private static final int MAX_VECTOR = 20;
     private ShapeShifter shapeShifter = new ShapeShifter(SHIFT_INTERVAL);
 
+    private static final ShapeStrategie strategieDefault = new ShapeStrategieDefault();
+    private static final ShapeStrategie strategieRndDefault = new ShapeStrategieRandomDirection();
+
     public WildesWuseln() {
         JPanel knopfPanel = new JPanel();
         JPanel shapePanel = new JPanel() {
@@ -31,6 +34,8 @@ public class WildesWuseln extends JFrame {
         JLabel statusLabel = new JLabel("");
 
         shapeShifter.setComponents(shapePanel, statusLabel);
+
+        shapeShifter.setStrategie(strategieDefault);
 
         JButton buttonNeueKugel = new JButton("Neue Kugel");
         buttonNeueKugel.addActionListener(new ActionListener() {
@@ -68,6 +73,23 @@ public class WildesWuseln extends JFrame {
             }
         });
 
+        JRadioButton buttonSwitchStrategieDefault = new JRadioButton("Default Strategie");
+        buttonSwitchStrategieDefault.setSelected(true);
+        buttonSwitchStrategieDefault.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                shapeShifter.setStrategie(strategieDefault);
+            }
+        });
+        JRadioButton buttonSwitchStrategieRndDirection = new JRadioButton("Random Direction Strategie");
+        buttonSwitchStrategieRndDirection.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                shapeShifter.setStrategie(strategieRndDefault);
+            }
+        });
+        ButtonGroup switchStrg = new ButtonGroup();
+        switchStrg.add(buttonSwitchStrategieDefault);
+        switchStrg.add(buttonSwitchStrategieRndDirection);
+
         JButton buttonClear = new JButton("Aufräumen!");
         buttonClear.setBackground(Color.RED);
         buttonClear.addActionListener(new ActionListener() {
@@ -86,6 +108,8 @@ public class WildesWuseln extends JFrame {
         knopfPanel.add(button100NeueKugeln);
         knopfPanel.add(buttonNeueKugelFW);
         knopfPanel.add(button100NeueKugelnFW);
+        knopfPanel.add(buttonSwitchStrategieDefault);
+        knopfPanel.add(buttonSwitchStrategieRndDirection);
         knopfPanel.add(statusLabel);
         knopfPanel.add(buttonClear);
 

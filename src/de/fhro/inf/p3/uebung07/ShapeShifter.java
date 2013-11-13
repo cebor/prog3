@@ -20,6 +20,8 @@ public class ShapeShifter implements ActionListener {
     private List<MovingShape> shapes;
     private Timer timer;
 
+    private ShapeStrategie strategie;
+
     /**
      * Erzeugt einen neuen Shape Shifter, der Shapes aus dem Bildschirm
      * herumschieben kann. Startet einen (Swing!) Timer, der die Shapes alle
@@ -68,9 +70,16 @@ public class ShapeShifter implements ActionListener {
      * (über die repaint Methode, die indirekt dann paint aufruft.
      */
     public void actionPerformed(ActionEvent e) {
-        for (MovingShape mShape : shapes) {
-            mShape.move(component.getWidth(), component.getHeight());
-        }
+        strategie.doAction(shapes, component.getWidth(), component.getHeight());
         component.repaint();
+    }
+
+    /**
+     * Set Strategie
+     *
+     * @param strategie New Strategie
+     */
+    public void setStrategie(ShapeStrategie strategie) {
+        this.strategie = strategie;
     }
 }

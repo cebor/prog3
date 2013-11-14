@@ -14,7 +14,8 @@ public class WildesWuseln extends JFrame {
     private ShapeShifter shapeShifter = new ShapeShifter(SHIFT_INTERVAL);
 
     private static final ShapeStrategie strategieDefault = new ShapeStrategieDefault();
-    private static final ShapeStrategie strategieRndDefault = new ShapeStrategieRandomDirection();
+    private static final ShapeStrategie strategieRndDirection = new ShapeStrategieRandomDirection();
+    private static final ShapeStrategie strategieBreath = new ShapeStrategieBreath();
 
     public WildesWuseln() {
         JPanel knopfPanel = new JPanel();
@@ -34,10 +35,9 @@ public class WildesWuseln extends JFrame {
         JLabel statusLabel = new JLabel("");
 
         shapeShifter.setComponents(shapePanel, statusLabel);
-
         shapeShifter.setStrategie(strategieDefault);
 
-        JButton buttonNeueKugel = new JButton("Neue Kugel");
+        /*JButton buttonNeueKugel = new JButton("Neue Kugel");
         buttonNeueKugel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 shapeShifter.add(new MovingShape(new Kugel(Zufall.color(),
@@ -53,7 +53,7 @@ public class WildesWuseln extends JFrame {
                             Zufall.size(MAX_SIZE)), Zufall.loc(getBounds().width), Zufall.loc(getBounds().height),
                             Zufall.speed(MAX_VECTOR), Zufall.speed(MAX_VECTOR)));
             }
-        });
+        });*/
 
         JButton buttonNeueKugelFW = new JButton("Neue Kugel (fw)");
         buttonNeueKugelFW.addActionListener(new ActionListener() {
@@ -83,12 +83,20 @@ public class WildesWuseln extends JFrame {
         JRadioButton buttonSwitchStrategieRndDirection = new JRadioButton("Random Direction Strategie");
         buttonSwitchStrategieRndDirection.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                shapeShifter.setStrategie(strategieRndDefault);
+                shapeShifter.setStrategie(strategieRndDirection);
+            }
+        });
+        JRadioButton buttonSwitchStrategieBreath = new JRadioButton("Random Direction Strategie");
+        buttonSwitchStrategieBreath.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                shapeShifter.setStrategie(strategieBreath);
             }
         });
         ButtonGroup switchStrg = new ButtonGroup();
         switchStrg.add(buttonSwitchStrategieDefault);
         switchStrg.add(buttonSwitchStrategieRndDirection);
+        switchStrg.add(buttonSwitchStrategieBreath);
+
 
         JButton buttonClear = new JButton("Aufräumen!");
         buttonClear.setBackground(Color.RED);
@@ -104,12 +112,13 @@ public class WildesWuseln extends JFrame {
         this.setSize(GROESSE + 100, GROESSE);
         getContentPane().setLayout(new BorderLayout());
         knopfPanel.setLayout(new GridLayout(8, 1));
-        knopfPanel.add(buttonNeueKugel);
-        knopfPanel.add(button100NeueKugeln);
+        /*knopfPanel.add(buttonNeueKugel);
+        knopfPanel.add(button100NeueKugeln);*/
         knopfPanel.add(buttonNeueKugelFW);
         knopfPanel.add(button100NeueKugelnFW);
         knopfPanel.add(buttonSwitchStrategieDefault);
         knopfPanel.add(buttonSwitchStrategieRndDirection);
+        knopfPanel.add(buttonSwitchStrategieBreath);
         knopfPanel.add(statusLabel);
         knopfPanel.add(buttonClear);
 

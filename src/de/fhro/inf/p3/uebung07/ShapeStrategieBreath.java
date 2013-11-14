@@ -8,9 +8,13 @@ import java.util.Map;
  * Created by felix on 11/14/13.
  */
 public class ShapeStrategieBreath implements ShapeStrategie {
-    private static final int MAX_SIZE = 10;
+    private final int maxSize;
 
-    private Map<Kugel, Boolean> kugeln = new HashMap<Kugel, Boolean>();
+    private static Map<Kugel, Boolean> kugeln = new HashMap<Kugel, Boolean>();
+
+    public ShapeStrategieBreath(int maxSize) {
+        this.maxSize = maxSize;
+    }
 
     @Override
     public void doAction(List<MovingShape> shapes, int maxX, int maxY) {
@@ -22,7 +26,7 @@ public class ShapeStrategieBreath implements ShapeStrategie {
             if (kugeln.get(kugel) == null)
                 kugeln.put(kugel, (Zufall.randomInt(0, 2) == 1));
 
-            if (kugel.getSize() >= MAX_SIZE - 1)
+            if (kugel.getSize() >= maxSize - 1)
                 kugeln.put(kugel, false);
             if (kugel.getSize() <= 0)
                 kugeln.put(kugel, true);

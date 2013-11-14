@@ -14,8 +14,8 @@ public class WildesWuseln extends JFrame {
     private ShapeShifter shapeShifter = new ShapeShifter(SHIFT_INTERVAL);
 
     private static final ShapeStrategie strategieDefault = new ShapeStrategieDefault();
-    private static final ShapeStrategie strategieRndDirection = new ShapeStrategieRandomDirection();
-    private static final ShapeStrategie strategieBreath = new ShapeStrategieBreath();
+    private static final ShapeStrategie strategieRndDirection = new ShapeStrategieRandomDirection(MAX_VECTOR);
+    private static final ShapeStrategie strategieBreath = new ShapeStrategieBreath(MAX_SIZE);
 
     public WildesWuseln() {
         JPanel knopfPanel = new JPanel();

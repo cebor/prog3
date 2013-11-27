@@ -8,7 +8,7 @@ import java.util.List;
 public interface IKunde {
     void addBestellung(Bestellung bestellung);
 
-    String getId();
+    int getId();
 
     String getName();
 

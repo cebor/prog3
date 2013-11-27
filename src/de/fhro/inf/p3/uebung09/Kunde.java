@@ -14,9 +14,78 @@ public abstract class Kunde implements IKunde, Serializable {
     private Adresse adresse;
     private List<Bestellung> bestellungen;
 
-    public Kunde(Adresse adresse) {
+    protected Kunde(Adresse adresse) {
         this.id = count++;
         this.adresse = adresse;
         this.bestellungen = new ArrayList<Bestellung>();
+    }
+
+    @Override
+    public void addBestellung(Bestellung bestellung) {
+        bestellungen.add(bestellung);
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
+    }
+
+    @Override
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    @Override
+    public List<Bestellung> getBestellungen() {
+        return bestellungen;
+    }
+
+    @Override
+    public List<Bestellung> getBezahlteBestellungen() {
+        List<Bestellung> bezahlteBestellungen = new ArrayList<Bestellung>();
+
+        for (Bestellung bestellung : bestellungen) {
+            if (bestellung.istBezahlt()) {
+                bezahlteBestellungen.add(bestellung);
+            }
+        }
+
+        return bezahlteBestellungen;
+    }
+
+    @Override
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Kunde kunde = (Kunde) o;
+
+        if (id != kunde.id) return false;
+        if (!adresse.equals(kunde.adresse)) return false;
+        if (!bestellungen.equals(kunde.bestellungen)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + adresse.hashCode();
+        result = 31 * result + bestellungen.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Kunde{" +
+                "id=" + id +
+                ", adresse=" + adresse +
+                ", bestellungen=" + bestellungen +
+                '}';
     }
 }

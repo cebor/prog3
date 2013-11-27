@@ -17,7 +17,7 @@ import java.util.*;
  * Die Klasse ist spezialisiert auf innerdeutsche Datumsangaben (bzgl. Feiertage
  * und Zeitzone) und bietet diverse Funktionen zur Datumsarithmetik.<br />
  * <br />
- *
+ * <p/>
  * <b>Datumsarithmetik ist keine triviale Aufgabe. Es müssen viele Bedingungen
  * beachtet werden:</b>
  * <ul>
@@ -142,7 +142,7 @@ public class Datum implements Comparable, Serializable {
     }
 
     /**
-     * @param s   enthaelt das Datum in der Darstellung rep
+     * @param s              enthaelt das Datum in der Darstellung rep
      * @param representation die uebergebene Darstellung (= 0, 1, 2)
      */
     public Datum(String s, int representation) throws ParseException {
@@ -152,7 +152,7 @@ public class Datum implements Comparable, Serializable {
     }
 
     /**
-     * @param s   falls aus s kein Datum erzeugt werden kann, dann wird null zurückgegeben
+     * @param s              falls aus s kein Datum erzeugt werden kann, dann wird null zurückgegeben
      * @param representation die uebergebene Darstellung (= 0, 1, 2)
      * @return Datum
      */

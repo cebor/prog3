@@ -13,26 +13,26 @@ import java.util.*;
 
 /**
  * <b><i>Klasse zum einfachen Umgang mit Datumsangaben.</i></b><br />
- * Instanzen dieser Klasse sind unver�nderbar.<br />
+ * Instanzen dieser Klasse sind unveränderbar.<br />
  * Die Klasse ist spezialisiert auf innerdeutsche Datumsangaben (bzgl. Feiertage
  * und Zeitzone) und bietet diverse Funktionen zur Datumsarithmetik.<br />
  * <br />
- * <p/>
- * <b>Datumsarithmetik ist keine triviale Aufgabe. Es m�ssen viele Bedingungen
+ *
+ * <b>Datumsarithmetik ist keine triviale Aufgabe. Es müssen viele Bedingungen
  * beachtet werden:</b>
  * <ul>
  * <li>Eine Minute hat nicht immer 60 Sekunden (z.B. wenn Schaltsekunden
- * eingef�gt werden, was bereits mehr als 20 mal seit 1972 passierte).</li>
+ * eingefügt werden, was bereits mehr als 20 mal seit 1972 passierte).</li>
  * <li>Ein Tag hat nicht immer 24 Stunden (z.B. bei
  * Sommer-/Winterzeitumstellung).</li>
  * <li>Eine Woche hat nicht immer 7 Tage (z.B. die erste Woche im Jahr).</li>
  * <li>Ein Jahr hat nicht immer 365 Tage (z.B. in Schaltjahren und bei
  * Kalenderanpassungen).</li>
  * <li>Die Berechnung, ob ein Jahr ein Schaltjahr ist, ist nicht immer
- * fehlerfrei (alle 4 Jahre, au�er alle 100, wenn nicht durch 400 teilbar).</li>
+ * fehlerfrei (alle 4 Jahre, außer alle 100, wenn nicht durch 400 teilbar).</li>
  * <li>Es wurden mehrmals mehrere Tage ausgelassen, um den Kalender an das
- * tats�chliche Sonnenjahr anzupassen (z.B. folgte auf Donnerstag 4. Oktober
- * 1582 als n�chster Tag Freitag 15. Oktober 1582).</li>
+ * tatsächliche Sonnenjahr anzupassen (z.B. folgte auf Donnerstag 4. Oktober
+ * 1582 als nächster Tag Freitag 15. Oktober 1582).</li>
  * <li>Es gibt nicht das Jahr 0. Nach 1 B.C. (vor Christi) folgte 1 A.D. (nach
  * Christi).</li>
  * <li>Die Zahl der Tage, ab der diese Tage als erste Woche im Jahr gelten, ist
@@ -40,41 +40,41 @@ import java.util.*;
  * <li>Der Wochenanfang ist manchmal mit Sonntag und manchmal mit Montag
  * definiert.</li>
  * <li>Es gibt unterschiedliche Behandlungen von zweistelligen Jahreszahlen.
- * Sie k�nnen als Jahreszahlen im ersten Jahrhundert A.D. gemeint sein oder es
+ * Sie können als Jahreszahlen im ersten Jahrhundert A.D. gemeint sein oder es
  * muss 1900 oder bei kleinen Werten vielleicht auch 2000 dazu addiert werden.</li>
  * <li>Die Angabe 01/02/03 kann in Deutschland 2003-02-01, in USA 2003-01-02
  * und in asiatischen Staaten 2001-02-03 bedeuten.</li>
- * <li>Die Uhrzeit kann bis 12 AM/PM oder bis 24 h z�hlen.</li>
- * <li>Zeitzonen m�ssen ber�cksichtigt werden. Die Bestimmung der Zeitzone
+ * <li>Die Uhrzeit kann bis 12 AM/PM oder bis 24 h zählen.</li>
+ * <li>Zeitzonen müssen berücksichtigt werden. Die Bestimmung der Zeitzone
  * eines Ortes ist nicht einfach.</li>
- * <li>Es gibt unterschiedliche und sich �ndernde lokale Bestimmungen und
+ * <li>Es gibt unterschiedliche und sich ändernde lokale Bestimmungen und
  * Anfangs-/Endzeiten zur Sommer-/Winterzeit.</li>
- * <li>In Europa beginnt die Sommerzeit seit 1980 am letzten Sonntag im M�rz,
+ * <li>In Europa beginnt die Sommerzeit seit 1980 am letzten Sonntag im März,
  * endete bis 1995 am letzten Sonntag im September und endet seit 1996 am
  * letzten Sonntag im Oktober.</li>
- * <li>Der Unterschied von Sommer- zur Winterzeit betr�gt nicht immer eine
+ * <li>Der Unterschied von Sommer- zur Winterzeit beträgt nicht immer eine
  * Stunde. Zum Beispiel galt 1947 in Deutschland die Hochsommerzeit (MEHSZ) mit
  * zwei Stunden Unterschied.</li>
  * <li>Es gibt verschiedene Kalendersysteme (z.B. 1-Jan-2000 (Gregorian) =
  * 23-Tevet-576 (Hebrew) = 24-Ramadan-1420 (Islamic)).</li>
  * <li>Der bei Astronomen beliebte 'Julian Day calendar' (Zyklen von 7980
  * astronomischen Jahren beginnend ab 1. Jan. 4713 B.C.) ist nicht das Gleiche
- * wie der von Julius Caesar eingef�hrte und bei einigen Orthodoxen heute noch
+ * wie der von Julius Caesar eingeführte und bei einigen Orthodoxen heute noch
  * benutzte 'Julian Calendar' (in Europa von 1. Jan. 45 B.C. bis 4. Okt. 1582
  * A.D.).</li>
- * <li>Die L�nder, die sich auf den (von Papst Gregory XIII eingef�hrten)
+ * <li>Die Länder, die sich auf den (von Papst Gregory XIII eingeführten)
  * gregorianischen Kalender umgestellt haben, haben dies zu sehr verschiedenen
  * Zeiten vollzogen, wodurch historische Berechungen erschwert werden (viele
- * europ�ische L�nder 1582, aber z.B. China erst 1949 und andere L�nder gar
+ * europäische Länder 1582, aber z.B. China erst 1949 und andere Länder gar
  * nicht).</li>
- * <li>Es gibt Beschr�nkungen im Wertebereich der
+ * <li>Es gibt Beschränkungen im Wertebereich der
  * Programmiersprachen-Funktionen.</li>
  * Z.B. in Java akzeptiert Date 290 Millionen Jahre B.C. (vor Christi) bis 290
  * Millionen Jahre A.D. (nach Christi), aber GregorianCalendar akzeptierte vor
- * JDK 1.2 kein Datum fr�her als 4713 B.C.</li>
+ * JDK 1.2 kein Datum früher als 4713 B.C.</li>
  * Noch gravierender: 2038-01-19 sind 2^31 Sekunden seit 1970-01-01 vergangen
  * und damit endet der Wertebereich des unter Unix und Windows bei
- * 32-Bit-Programmierung in C �blichen time_t.</li>
+ * 32-Bit-Programmierung in C üblichen time_t.</li>
  * </ul>
  */
 public class Datum implements Comparable, Serializable {
@@ -97,14 +97,14 @@ public class Datum implements Comparable, Serializable {
         // dies ist ein Hack und sollte durch eine
         // richtige Loesung ersetzt werden
         feiertage.add(new Datum(2002, 1, 1));       // Neujahr
-        feiertage.add(new Datum(2002, 1, 6));       // Drei K�nig
+        feiertage.add(new Datum(2002, 1, 6));       // Drei König
         feiertage.add(new Datum(2002, 3, 29));      // Karfreitag
         feiertage.add(new Datum(2002, 4, 1));       // Ostermontag
         feiertage.add(new Datum(2002, 5, 1));       // Tag der Arbeit
         feiertage.add(new Datum(2002, 5, 9));       // Himmelfahrt
         feiertage.add(new Datum(2002, 5, 20));      // Pfingstmontag
         feiertage.add(new Datum(2002, 5, 30));      // Fronleichnam
-        feiertage.add(new Datum(2002, 8, 15));      // Mari� Himmelfahrt
+        feiertage.add(new Datum(2002, 8, 15));      // Mariä Himmelfahrt
         feiertage.add(new Datum(2002, 10, 3));      // Tag der dt. Einheit
         feiertage.add(new Datum(2002, 11, 1));      // Allerheiligen
         feiertage.add(new Datum(2002, 12, 25));     // 1. Weihnachtstag
@@ -142,7 +142,7 @@ public class Datum implements Comparable, Serializable {
     }
 
     /**
-     * @param s              enthaelt das Datum in der Darstellung rep
+     * @param s   enthaelt das Datum in der Darstellung rep
      * @param representation die uebergebene Darstellung (= 0, 1, 2)
      */
     public Datum(String s, int representation) throws ParseException {
@@ -152,7 +152,7 @@ public class Datum implements Comparable, Serializable {
     }
 
     /**
-     * @param s              falls aus s kein Datum erzeugt werden kann, dann wird null zur�ckgegeben
+     * @param s   falls aus s kein Datum erzeugt werden kann, dann wird null zurückgegeben
      * @param representation die uebergebene Darstellung (= 0, 1, 2)
      * @return Datum
      */
@@ -265,7 +265,7 @@ public class Datum implements Comparable, Serializable {
 
     public int diff(Datum d) {
         /*
-         * Differenz der gegen die UTC (Universal Time Coordonn�) normalisierten
+         * Differenz der gegen die UTC (Universal Time Coordonné) normalisierten
 		 * Zeitangaben in Millisekunden seit 1.1.1970 Die UTC ist neutral zu
 		 * Sommerzeit / Winterzeit und sonstigen Datumsanomalien (siehe oben).
 		 * Die Schaltsekunden der UTC beeinflussen die Berechnung nicht, da sie
@@ -281,7 +281,7 @@ public class Datum implements Comparable, Serializable {
     }
 
     public boolean equals(Object x) {
-        // equals auf die equals-Methode von Calendar zu st�tzen kann Probleme bereiten
+        // equals auf die equals-Methode von Calendar zu stützen kann Probleme bereiten
         // da die Klasse mehr Attribute zum Vergleich heranzieht als gewollt, z.B. Zeitzone
         if (this == x)
             return true;
@@ -300,7 +300,7 @@ public class Datum implements Comparable, Serializable {
 
     public int hashCode() {
         // cal.hashCode() nicht geeignet,
-        // da es Widerspr�che zur equals-Implementierung geebn kann
+        // da es Widersprüche zur equals-Implementierung geebn kann
         // DAY_OF_MONTH gibt eine relativ gute Streuung
         return cal.get(Calendar.DAY_OF_MONTH);
     }

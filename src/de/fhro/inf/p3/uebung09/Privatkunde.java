@@ -1,7 +1,5 @@
 package de.fhro.inf.p3.uebung09;
 
-import de.fhro.inf.p3.dt.Datum;
-
 /**
  * Created by felix on 11/27/13.
  */

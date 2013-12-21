@@ -1,7 +1,5 @@
 package de.fhro.inf.p3.uebung09;
 
-import de.fhro.inf.p3.dt.Datum;
-
 /**
  * Created by felix on 11/27/13.
  */
@@ -75,6 +73,7 @@ public class Bestellung {
         return anzahl;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,28 +81,14 @@ public class Bestellung {
 
         Bestellung that = (Bestellung) o;
 
-        if (anzahl != that.anzahl) return false;
-        if (artikel != that.artikel) return false;
         if (id != that.id) return false;
-        if (!datumBestellung.equals(that.datumBestellung)) return false;
-        if (datumLieferung != null ? !datumLieferung.equals(that.datumLieferung) : that.datumLieferung != null)
-            return false;
-        if (datumStorno != null ? !datumStorno.equals(that.datumStorno) : that.datumStorno != null) return false;
-        if (datumZahlung != null ? !datumZahlung.equals(that.datumZahlung) : that.datumZahlung != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + datumBestellung.hashCode();
-        result = 31 * result + (datumLieferung != null ? datumLieferung.hashCode() : 0);
-        result = 31 * result + (datumZahlung != null ? datumZahlung.hashCode() : 0);
-        result = 31 * result + (datumStorno != null ? datumStorno.hashCode() : 0);
-        result = 31 * result + artikel;
-        result = 31 * result + anzahl;
-        return result;
+        return id;
     }
 
     @Override

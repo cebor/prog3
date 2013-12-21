@@ -66,18 +66,13 @@ public abstract class Kunde implements IKunde, Serializable {
         Kunde kunde = (Kunde) o;
 
         if (id != kunde.id) return false;
-        if (!adresse.equals(kunde.adresse)) return false;
-        if (!bestellungen.equals(kunde.bestellungen)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + adresse.hashCode();
-        result = 31 * result + bestellungen.hashCode();
-        return result;
+        return id;
     }
 
     @Override

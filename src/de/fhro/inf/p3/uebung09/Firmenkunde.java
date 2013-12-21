@@ -31,6 +31,6 @@ public class Firmenkunde extends Kunde {
 
     @Override
     public String getName() {
-        return null;
+        return firmenname + " " + gesellschaftsform;
     }
 }

@@ -3,7 +3,7 @@
  * Date: May 26, 2002
  * Time: 11:53:05 AM
  */
-package de.fhro.inf.p3.dt;
+package de.fhro.inf.p3.uebung09;
 
 import java.io.Serializable;
 import java.text.ParseException;
